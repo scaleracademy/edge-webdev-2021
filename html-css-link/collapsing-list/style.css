@@ -1,0 +1,10 @@
+li li {
+  height: 0;
+  visibility: hidden;
+}
+
+li:hover > * > li {
+  height: auto;
+  visibility: visible;
+}
+
