@@ -10,10 +10,14 @@
   font-size: 7pt;
 }
 
-.c1 {
-
+.outer > .inner {
+  background-color: aqua;
 }
 
-.c2 {
-  
+div + p {
+  color: green;
+}
+
+div ~ p {
+  font-weight: bold;
 }
