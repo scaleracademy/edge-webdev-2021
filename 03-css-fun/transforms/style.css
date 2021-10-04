@@ -1,0 +1,22 @@
+div {
+  height: 50px;
+  width: 50px;
+  margin: 30px;
+  background-color: midnightblue;
+}
+
+#two {
+  transform: translateY(30px) translateX(-20px);
+}
+
+#four {
+  transform: rotate(45deg);
+}
+
+#six {
+  transform: skewX(10deg);
+}
+
+#eight {
+  transform: scale(2);
+}
