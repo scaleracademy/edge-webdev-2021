@@ -27,7 +27,7 @@ div:nth-child(4) {
 
 div:nth-child(5):hover {
   transform: rotateZ(360deg);
-} 
+}
 
 div:nth-child(6):hover {
   transform: translateY(100px);
@@ -35,4 +35,30 @@ div:nth-child(6):hover {
 
 div:nth-child(7):hover {
   margin-top: 130px;
+}
+
+div:nth-child(8):hover {
+  transform: rotateZ(360deg) translateX(100px);
+}
+
+div:nth-child(9) {
+  animation-name: wheel;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes wheel {
+  0% {
+  }
+  25% {
+    transform: scale(2) rotateZ(180deg);
+  }
+  50% {
+    transform: translateX(100px) rotateZ(360deg);
+  }
+  75% {
+    transform: scale(0.5) rotateZ(180deg);
+  }
+  100% {
+  }
 }
