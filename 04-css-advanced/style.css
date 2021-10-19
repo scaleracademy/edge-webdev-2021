@@ -1,0 +1,38 @@
+div {
+  height: 70px;
+  width: 70px;
+  margin: 30px;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  font-size: 30pt;
+  transition: 2s;
+}
+
+div:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+div:nth-child(2) {
+  transform: rotateY(45deg);
+}
+
+div:nth-child(3) {
+  transform: scaleX(0.67);
+}
+
+div:nth-child(4) {
+  transform: skewX(10deg);
+}
+
+div:nth-child(5):hover {
+  transform: rotateZ(360deg);
+} 
+
+div:nth-child(6):hover {
+  transform: translateY(100px);
+}
+
+div:nth-child(7):hover {
+  margin-top: 130px;
+}
