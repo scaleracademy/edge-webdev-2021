@@ -1,0 +1,26 @@
+div {
+  margin: 100px;
+  padding: 20px;
+  font-size: 38pt;
+  font-family: sans-serif;
+
+  height: 80px;
+  width: 400px;
+  background-color: dodgerblue;
+
+  color: white;
+
+  box-shadow: 5px 5px 5px black;
+  transition: 1s;
+}
+
+div:hover {
+  transform: translateX(-10px) translateY(-10px);
+  box-shadow: 15px 15px 10px black;
+}
+
+div:active {
+  transform: translateX(3px) translateY(3px);
+  box-shadow: 2px 2px 2px black;
+  transition: 0.2s;
+}
