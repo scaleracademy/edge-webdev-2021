@@ -32,3 +32,12 @@ btnAdd.onclick = function () {
   addItemToList(newTaskName);
   inpTask.value = "";
 }
+
+/**
+ * Further requirements:
+ * 1. When enter button is clicked (cursor is on inpTask), 
+ *    also do the same steps as add button
+ * 2. When input is empty, show an alert message that input
+ *    cannot be empty.
+ * 
+ */
