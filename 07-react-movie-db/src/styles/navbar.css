@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar {
+  outline: none;
+  border: none;
+  background: none;
+
+  background-color: #1b2634;
+  color: #eee;
+}
