@@ -5,5 +5,13 @@
 }
 
 body {
-  font-family: 'Monteserrat', sans-serif;
+  font-family: "Monteserrat", sans-serif;
+}
+
+a {
+  color: #eee;
+}
+
+a:active {
+  color: #eee;
 }
