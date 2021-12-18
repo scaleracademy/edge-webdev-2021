@@ -2,6 +2,10 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+
+
 app.get("/", (req, res) => {
   console.log("HTTP METHOD = " + req.method);
   res.send("Hello World!");
@@ -19,6 +23,7 @@ app.get("/abcd", (req, res) => {
 });
 
 app.post("/abcd", (req, res) => {
+  console.log(req.body)
   res.send("WOW! You posted to abcd");
 });
 
