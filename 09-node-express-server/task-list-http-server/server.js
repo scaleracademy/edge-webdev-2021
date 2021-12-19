@@ -12,7 +12,6 @@ const app = express()
  */
 // lets create a task_list to store tasks
 const task_list =[]
-
 // to get the body
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -46,7 +45,6 @@ app.get('/tasks', (req, res) => {
  */
 
 app.get('/tasks/:id', (req, res) => {
-
     // BONUS: figure out how `:id` part works 
     // id will get store in params of request so
     const id = req.params.id;
