@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /** 
  * Imagine there is a list of tasks like this: 
  *  1. Enroll to Scaler 
@@ -22,8 +25,18 @@ const app = express()
  *         'Get a girlfriend/boyfriend'
  *      ]
  */
-app.get('/tasks', (req, res) => {
 
+var taskList = [                                     //To store all the tasks.
+    "Enroll to Scaler",
+    "Learn Node.js",
+    "Learn React.js",
+    "Get a job",
+    "Get a girlfriend/boyfriend",
+];
+
+
+app.get('/tasks', (req, res) => {
+    res.send(taskList);
 })
 
 /**
@@ -39,8 +52,15 @@ app.get('/tasks', (req, res) => {
  */
 
 app.get('/tasks/:id', (req, res) => {
-
+    let id_of_this_search = req.params.id;
+    if (taskList.length < id_of_this_search) {                 //Check if id is valid or not
+        res.send('Please try again with a valid entry!');
+    }
+    else {
+        res.send(taskList[id_of_this_search - 1]);
+    }
     // BONUS: figure out how `:id` part works 
+
 })
 
 /**
@@ -54,7 +74,13 @@ app.get('/tasks/:id', (req, res) => {
  */
 
 app.post('/tasks', (req, res) => {
-
+    if (req.query["task"] === undefined) {                      //Check if task(query) is valid or not
+        res.send(`Cannot add to task list,please provide a task to add!!`);
+    }
+    else {
+        taskList.push(req.query["task"]);
+        res.send(`Task ${req.query["task"]} is successfully added to tasks list`);
+    }
 })
 
 app.listen(4114, () => {
