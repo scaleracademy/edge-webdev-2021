@@ -31,7 +31,7 @@ function to_read(number) {                                                      
             }
             else {
                 console.log(`Successfully read ${i}.txt and added values from it to all_data_from_files array!`);
-                if (i === 3) {
+                if (i === number_of_files) {
                     to_add_values(data.toString().split('\n'), false);
                 }
                 else {
