@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
 /** 
  * Imagine there is a list of tasks like this: 
  *  1. Enroll to Scaler 
@@ -23,7 +26,7 @@ const app = express()
  *      ]
  */
 app.get('/tasks', (req, res) => {
-
+    res.send(req.body);
 })
 
 /**
@@ -39,8 +42,10 @@ app.get('/tasks', (req, res) => {
  */
 
 app.get('/tasks/:id', (req, res) => {
-
     // BONUS: figure out how `:id` part works 
+    // console.log(req.params);
+    const id = req.params.id;
+    res.send(req.body[id]);
 })
 
 /**
@@ -54,7 +59,8 @@ app.get('/tasks/:id', (req, res) => {
  */
 
 app.post('/tasks', (req, res) => {
-
+    // console.log(req.body);
+    res.send("Data sent")
 })
 
 app.listen(4114, () => {
