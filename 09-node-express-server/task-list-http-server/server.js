@@ -10,6 +10,12 @@ const app = express()
  *  5. Get a girlfriend/boyfriend
  *  
  */
+// lets create a task_list to store tasks
+const task_list =[]
+
+// to get the body
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 /**
  * When GET request is sent to 127.0.0.1:4114/tasks,
@@ -23,7 +29,8 @@ const app = express()
  *      ]
  */
 app.get('/tasks', (req, res) => {
-
+    if(task_list.length) res.send(task_list);
+    else res.send('No task to show :(');
 })
 
 /**
@@ -41,6 +48,10 @@ app.get('/tasks', (req, res) => {
 app.get('/tasks/:id', (req, res) => {
 
     // BONUS: figure out how `:id` part works 
+    // id will get store in params of request so
+    const id = req.params.id;
+    if(id > 0 && id <= task_list.length) res.send(task_list[id-1]);
+    else res.send('Invalid Id');
 })
 
 /**
@@ -54,7 +65,12 @@ app.get('/tasks/:id', (req, res) => {
  */
 
 app.post('/tasks', (req, res) => {
-
+    const task = req.body["task"];
+    if(task){
+        task_list.push(task);
+        res.send("Task added successfully!");
+    }
+    else res.send("No task is provided to post");
 })
 
 app.listen(4114, () => {
