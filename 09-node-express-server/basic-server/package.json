@@ -1,0 +1,14 @@
+{
+  "name": "basic-server",
+  "version": "0.0.1",
+  "description": "This is a basic HTTP server in NodeJS ",
+  "main": "server.js ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arnav Gupta <arnav.gupta@scaler.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
