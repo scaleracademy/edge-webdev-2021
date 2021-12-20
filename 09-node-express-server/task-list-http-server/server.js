@@ -4,6 +4,11 @@ const app = express()
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+app.get('/', (req, res)=>{
+    res.send("This is home page")
+})
+
+const taskList = [];
 /** 
  * Imagine there is a list of tasks like this: 
  *  1. Enroll to Scaler 
@@ -26,7 +31,7 @@ app.use(express.json());
  *      ]
  */
 app.get('/tasks', (req, res) => {
-    res.send(req.body);
+    res.send(taskList);
 })
 
 /**
@@ -45,7 +50,11 @@ app.get('/tasks/:id', (req, res) => {
     // BONUS: figure out how `:id` part works 
     // console.log(req.params);
     const id = req.params.id;
-    res.send(req.body[id]);
+    if(id > taskList.length || id < 1) {
+        res.send("Invalid Task List!");
+    } else {
+        res.send(taskList[id-1]);
+    }
 })
 
 /**
@@ -60,7 +69,11 @@ app.get('/tasks/:id', (req, res) => {
 
 app.post('/tasks', (req, res) => {
     // console.log(req.body);
-    res.send("Data sent")
+    list = req.body;
+    for(let i = 0; i < list.length; i++) {
+        taskList.push(list[i]);
+    }
+    res.send("Task List Updated!")
 })
 
 app.listen(4114, () => {
