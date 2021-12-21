@@ -26,13 +26,13 @@ function checkForKey(req, res, next) {
   }
 }
 
+app.use(decodeQuery)
 
-
-app.get('/public', decodeQuery, (req, res) => {
+app.get('/public', (req, res) => {
   res.send('Hello ' + req.query.name);
 })
 
-app.get('/private', decodeQuery, checkForKey, (req, res) => {
+app.get('/private', checkForKey, (req, res) => {
   res.send('Hi ' + req.query.name + ', welcome to the secret world of Scalerverse!');
 })
 
