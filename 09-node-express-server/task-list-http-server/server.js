@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json());
 
 /** 
  * Imagine there is a list of tasks like this: 
@@ -22,8 +23,30 @@ const app = express()
  *         'Get a girlfriend/boyfriend'
  *      ]
  */
-app.get('/tasks', (req, res) => {
+let tasks = ["Enroll to Scaler",
+    "Learn Nodejs",
+    "Learn Reactjs",
+    "Get a job",
+    "Get a girlfriend/boyfriend"]
 
+app.get("/", (req, res) => {
+    res.send("Welcome User , please go /tasks to get the options")
+})
+
+app.get('/tasks', (req, res) => {
+    res.setHeader('Content-type', 'text/html');
+    let list = "";
+    for (let i = 0; i < tasks.length; i++) {
+        list += `<li><a href="">${tasks[i]}</a></li>`
+    }
+    const html = `<h3>Here is your list : </h3>
+        <ul>
+        ${list}
+        </ul >
+        `
+    res.send(html)
+    // res.write(html)
+    // res.end()
 })
 
 /**
@@ -41,6 +64,11 @@ app.get('/tasks', (req, res) => {
 app.get('/tasks/:id', (req, res) => {
 
     // BONUS: figure out how `:id` part works 
+     const id = req.params.id;
+    if (id > 0 && id <= tasks.length)
+        res.send(`<h1>${tasks[id - 1]}<h1>`)
+    else
+        res.send(`<h1>Sorry !! No such tasks present.</h1>`)
 })
 
 /**
@@ -54,7 +82,10 @@ app.get('/tasks/:id', (req, res) => {
  */
 
 app.post('/tasks', (req, res) => {
-
+    tasks.push(req.body.task)
+    // console.log(tasks);
+    res.setHeader('Content-type', 'text/html');
+    res.send(`<h1>Task addded Succesfully !!</h1>`)
 })
 
 app.listen(4114, () => {
