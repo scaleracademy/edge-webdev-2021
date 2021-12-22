@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require("fs");
 const app = express()
 app.use(express.json());
 
@@ -12,6 +13,33 @@ app.use(express.json());
  *  
  */
 
+let tasks = ["Enroll to Scaler",
+    "Learn Nodejs",
+    "Learn Reactjs",
+    "Get a job",
+    "Get a girlfriend/boyfriend"]
+
+if (fs.existsSync("./task.json")) {
+    let data = fs.readFileSync("./task.json", "utf-8");
+    data = JSON.parse(data);
+    tasks = data.task;
+}
+else {
+    const obj = {
+        "task": tasks
+    }
+    fs.writeFileSync("./task.json", JSON.stringify(obj));
+}
+
+function save(req, res) {
+    tasks.push(req.body.task)
+    const obj = {
+        "task": tasks
+    }
+    fs.writeFileSync("./task.json", JSON.stringify(obj));
+    res.send(`Task addded Succesfully`)
+}
+
 /**
  * When GET request is sent to 127.0.0.1:4114/tasks,
  * response will be 
@@ -23,26 +51,22 @@ app.use(express.json());
  *         'Get a girlfriend/boyfriend'
  *      ]
  */
-let tasks = ["Enroll to Scaler",
-    "Learn Nodejs",
-    "Learn Reactjs",
-    "Get a job",
-    "Get a girlfriend/boyfriend"]
 
 app.get("/", (req, res) => {
-    res.send("Welcome User , please go /tasks to get the options")
+    res.send(`<h1>Welcome User , please go on <a href="/tasks">/task</a> to get the options</h1>`)
 })
 
 app.get('/tasks', (req, res) => {
     res.setHeader('Content-type', 'text/html');
     let list = "";
     for (let i = 0; i < tasks.length; i++) {
-        list += `<li><a href="">${tasks[i]}</a></li>`
+        list += `<li><a href="/tasks/${i + 1}">${tasks[i]}</a></li>`
     }
-    const html = `<h3>Here is your list : </h3>
+    const html = `<h1>Here is your list : 
         <ul>
         ${list}
         </ul >
+        </h1>
         `
     res.send(html)
     // res.write(html)
@@ -72,8 +96,20 @@ app.get('/tasks/:id', (req, res) => {
 })
 
 app.delete('/tasks/:id', (req, res) => {
-
     // Delete task with given id
+    const id = req.params.id;
+    if (id > 0 && id <= tasks.length) {
+        tasks.splice(id - 1, 1);
+        console.log(tasks);
+        const obj = {
+            "task": tasks
+        }
+        fs.writeFileSync("./task.json", JSON.stringify(obj));
+        res.send("Sucessfully deleted !!")
+    }
+    else {
+        res.send("No such task present !")
+    }
 })
 
 /**
@@ -86,12 +122,7 @@ app.delete('/tasks/:id', (req, res) => {
  *   6. Complete NodeJS Assignment
  */
 
-app.post('/tasks', (req, res) => {
-    tasks.push(req.body.task)
-    // console.log(tasks);
-    res.setHeader('Content-type', 'text/html');
-    res.send(`<h1>Task addded Succesfully !!</h1>`)
-})
+app.post('/tasks', save)
 
 app.listen(4114, () => {
     console.log('server started on http://127.0.0.1:4114')
