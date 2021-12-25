@@ -43,6 +43,11 @@ app.get('/tasks/:id', (req, res) => {
     // BONUS: figure out how `:id` part works 
 })
 
+app.delete('/tasks/:id', (req, res) => {
+    
+    // Delete task with given id
+})
+
 /**
  * When POST request is sent to 127.0.0.1:4114/tasks,
  * with the body:
@@ -60,3 +65,11 @@ app.post('/tasks', (req, res) => {
 app.listen(4114, () => {
     console.log('server started on http://127.0.0.1:4114')
 })
+
+/**
+ * BONUS: 
+ *  - Save the tasks to a file tasks.json 
+ *  - Update the file every time a new task is created/deleted
+ *  - When server is restarted, old tasks should be available 
+ *     - Read the file at server start to load the saved tasks
+ */
