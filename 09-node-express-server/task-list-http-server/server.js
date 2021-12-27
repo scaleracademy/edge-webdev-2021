@@ -1,75 +1,49 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const fs = require("fs/promises");
+let data = require("./tasks.json");
 
-/** 
- * Imagine there is a list of tasks like this: 
- *  1. Enroll to Scaler 
- *  2. Learn Node.js
- *  3. Learn React.js
- *  4. Get a job
- *  5. Get a girlfriend/boyfriend
- *  
- */
+app = express();
+app.use(express.json());
 
-/**
- * When GET request is sent to 127.0.0.1:4114/tasks,
- * response will be 
- *      [
- *         'Enroll to Scaler',
- *         'Learn Node.js',
- *         'Learn React.js',
- *         'Get a job',
- *         'Get a girlfriend/boyfriend'
- *      ]
- */
-app.get('/tasks', (req, res) => {
+let todoLists = data.tasks;
 
-})
+function check(req, res, next) {
+  // middleware
+  const id = req.params.id;
+  if (id > 0 && id <= todoLists.length) {
+    next();
+  } else res.send("Please enter a valid id");
+}
 
-/**
- * If GET request is sent to 127.0.0.1:4114/tasks/1,
- * Then response will be 
- * 
- *     'Enroll to Scaler'
- * 
- * If GET request is sent to 127.0.0.1:4114/tasks/2
- * Then response will be
- * 
- *    'Learn Node.js'
- */
+app.get("/tasks", (req, res) => {
+  res.send(todoLists);
+});
 
-app.get('/tasks/:id', (req, res) => {
+app.get("/tasks/:id", check, (req, res) => {
+  res.send(todoLists[req.params["id"] - 1]);
+});
 
-    // BONUS: figure out how `:id` part works 
-})
+app.post("/tasks", (req, res) => {
+  todoLists.push(req.body["task"]);
+  data = { tasks: [...todoLists] };
+  data = JSON.stringify(data);
+  fs.writeFile("./tasks.json", data, (err) => {
+    if (err) console.log("task failed");
+  });
+  res.send("Tasks Successfully Added");
+});
 
-app.delete('/tasks/:id', (req, res) => {
-    
-    // Delete task with given id
-})
+app.delete("/tasks/:id", check, (req, res) => {
+  const id = req.params.id - 1;
+  todoLists = todoLists.filter((el, idx) => idx != id);
+  data = { tasks: [...todoLists] };
+  data = JSON.stringify(data);
+  fs.writeFile("./tasks.json", data, (err) => {
+    console.log("task failed");
+  });
+  res.send("Task Successfully Deleted");
+});
 
-/**
- * When POST request is sent to 127.0.0.1:4114/tasks,
- * with the body:
- *          { "task": "Complete NodeJS Assignment" } 
- * 
- * Then a new task will be added to the list.
- *   
- *   6. Complete NodeJS Assignment
- */
-
-app.post('/tasks', (req, res) => {
-
-})
-
-app.listen(4114, () => {
-    console.log('server started on http://127.0.0.1:4114')
-})
-
-/**
- * BONUS: 
- *  - Save the tasks to a file tasks.json 
- *  - Update the file every time a new task is created/deleted
- *  - When server is restarted, old tasks should be available 
- *     - Read the file at server start to load the saved tasks
- */
+app.listen(3000, () => {
+  console.log("listening on port 3000...");
+});
