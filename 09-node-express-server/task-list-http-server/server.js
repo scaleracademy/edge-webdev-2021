@@ -60,3 +60,54 @@ app.post('/tasks', (req, res) => {
 app.listen(4114, () => {
     console.log('server started on http://127.0.0.1:4114')
 })
+
+
+
+
+
+const express = require("express");
+const app = express();
+app.use(express.urlencoded({ extended: true })); // to enable the parsing of the body if in it is of json format or in url-encoded fromat.
+app.use(express.json());
+
+const taskList = [
+  "Enroll to Scaler",
+  "Learn Node.Js",
+  "Learn React.Js",
+  "Get a Job",
+  "Get a Girlfriend",
+];
+
+const ln = taskList.length;
+app.get("/tasks", (req, res) => {
+  res.send(taskList);
+});
+app.post("/tasks", (req, res) => {
+  const times = taskList.length - ln;
+  var strCur = req.body["task"];
+  strCur = strCur + " " + times;
+  taskList.push(strCur);
+  res.send(
+    "sending post request and aded the  one more task! \n now task =" + times
+  );
+});
+
+app.get("/tasks/:id", (req, res) => {
+  // if path is like /:id then we can extract the string after / using req.params.id
+  res.send(taskList[req.params.id]);
+});
+
+app.listen("3300", () => {
+  console.log("listening at port" + 3300);
+});
+
+
+
+
+
+
+
+
+
+
+
