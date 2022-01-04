@@ -125,12 +125,6 @@ when server is restarted old task should  be available
 Read the file at server start to load the saved tasks
 */
 
-// You can't send the  body in get erequest.
-/* Save the tasks to a file task.json 
-update the file every time a new taks is created 
-when server is restarted old task should  be available
-Read the file at server start to load the saved tasks
-*/
 
 
 
