@@ -53,19 +53,9 @@ app.get('/tasks/:id', (req, res) => {
  *   6. Complete NodeJS Assignment
  */
 
-app.post('/tasks', (req, res) => {
-
-})
-
-app.listen(4114, () => {
-    console.log('server started on http://127.0.0.1:4114')
-})
-
-
-
-
-
 const express = require("express");
+const fs = require("fs");
+
 const app = express();
 app.use(express.urlencoded({ extended: true })); // to enable the parsing of the body if in it is of json format or in url-encoded fromat.
 app.use(express.json());
@@ -78,6 +68,15 @@ const taskList = [
   "Get a Girlfriend",
 ];
 
+saveTaskToFile = () => {
+  fs.writeFile("1.txt", taskList.toString().replace(",", "\n"), (err) => {
+    if (err) throw err;
+    else {
+      console.log("Saved the File\n");
+    }
+  });
+};
+
 const ln = taskList.length;
 app.get("/tasks", (req, res) => {
   res.send(taskList);
@@ -87,27 +86,50 @@ app.post("/tasks", (req, res) => {
   var strCur = req.body["task"];
   strCur = strCur + " " + times;
   taskList.push(strCur);
+
+  var curTaskToSave = "";
+  var str = taskList.toString();
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] == ",") {
+      curTaskToSave += "\n";
+    } else {
+      curTaskToSave += str[i];
+    }
+  }
+  console.log(curTaskToSave);
+
+  fs.writeFile("task.json", curTaskToSave, (err) => {
+    if (err) throw err;
+    else {
+      console.log("Saved the File\n");
+    }
+  });
+
   res.send(
     "sending post request and aded the  one more task! \n now task =" + times
   );
 });
+saveTaskToFile;
 
 app.get("/tasks/:id", (req, res) => {
   // if path is like /:id then we can extract the string after / using req.params.id
-  res.send(taskList[req.params.id]);
+  if (req.params.id >= taskList.length || req.params.id < 0) {
+    res.send("This is not Authorised!!");
+  } else {
+    res.send(taskList[req.params.id]);
+  }
 });
 
 app.listen("3300", () => {
   console.log("listening at port" + 3300);
 });
 
-
-
-
-
-
-
-
+// You can't send the  body in get erequest.
+/* Save the tasks to a file task.json 
+update the file every time a new taks is created 
+when server is restarted old task should  be available
+Read the file at server start to load the saved tasks
+*/
 
 
 
