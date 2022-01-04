@@ -55,10 +55,6 @@ app.get('/tasks/:id', (req, res) => {
 
 
 
-
-
-
-
 const express = require("express");
 const fs = require("fs");
 
@@ -74,14 +70,6 @@ const taskList = [
   "Get a Girlfriend",
 ];
 
-saveTaskToFile = () => {
-  fs.writeFile("1.txt", taskList.toString().replace(",", "\n"), (err) => {
-    if (err) throw err;
-    else {
-      console.log("Saved the File\n");
-    }
-  });
-};
 
 const ln = taskList.length;
 app.get("/tasks", (req, res) => {
@@ -129,6 +117,13 @@ app.get("/tasks/:id", (req, res) => {
 app.listen("3300", () => {
   console.log("listening at port" + 3300);
 });
+
+// You can't send the  body in get erequest.
+/* Save the tasks to a file task.json 
+update the file every time a new taks is created 
+when server is restarted old task should  be available
+Read the file at server start to load the saved tasks
+*/
 
 // You can't send the  body in get erequest.
 /* Save the tasks to a file task.json 
