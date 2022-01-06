@@ -1,7 +1,14 @@
 const express = require("express");
+const fs=require('fs');
 const app = express();
 
 app.use(express.json({ extended: true }));
+var taskList;
+const fileName="tasks.json";
+
+
+read();
+
 /**
  * Imagine there is a list of tasks like this:
  *  1. Enroll to Scaler
@@ -24,15 +31,10 @@ app.use(express.json({ extended: true }));
  *      ]
  */
 
-var taskList = {
-  1: "Enroll to Scaler",
-  2: "Learn Node.js",
-  3: "Learn React.js",
-  4: "Get a job",
-  5: "Get a girlfriend/boyfriend",
-};
+
 app.get("/tasks", (req, res) => {
-  res.send(Object.values(taskList));
+  res.send(taskList);
+  console.log(taskList);
 });
 
 /**
@@ -49,16 +51,35 @@ app.get("/tasks", (req, res) => {
 
 app.get("/tasks/:id", (req, res) => {
   // BONUS: figure out how `:id` part works
-  if (req.params.id in taskList) {
-    res.send(taskList[req.params.id]);
-  } else {
-    res.send("Task not found");
+  const id=Number(req.params.id);
+  if(isNaN(id)){
+    console.log(id);
+    return res.status(400).send('Invalid id');
   }
+
+  if(id<=0 || id>taskList.length){
+    return res.status(404).send('Task not found');
+  }else
+     res.send(taskList[id]);
 });
 
+/**
+ * If POST request is sent to
+});
+**/
 app.delete('/tasks/:id', (req, res) => {
     
     // Delete task with given id
+    const id=Number(req.params.id);
+    if(isNaN(id)){
+      console.log(id);
+      return res.status(400).send('Invalid id');
+    }
+    else{
+      delete taskList[id];
+      write(taskList);
+      res.send("Deleted task with id :"+id +" successfully");
+    }
 })
 
 /**
@@ -75,7 +96,9 @@ app.post("/tasks", (req, res) => {
   if (req.body.task == undefined) {
     res.send("Please add a body to add a task. The format should be {\"task\": \"task name\"}");
   } else {
-    taskList[Object.keys(taskList).length + 1] = req.body.task;
+    const index=Object.keys(taskList).length + 1;
+    taskList[index] = req.body.task;
+    write(taskList);
     res.send("A new task " + req.body.task + " has been added to the list");
   }
 });
@@ -91,3 +114,25 @@ app.listen(4114, () => {
  *  - When server is restarted, old tasks should be available 
  *     - Read the file at server start to load the saved tasks
  */
+
+
+
+
+ function read(){
+  fs.readFile(fileName, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      taskList=JSON.parse(data);
+      console.log(taskList);
+    }
+  });
+}
+
+function write(data) {
+  fs.writeFile(fileName, JSON.stringify(data), (err) => {
+    if (err) {
+      throw err;
+    }
+  });
+}
