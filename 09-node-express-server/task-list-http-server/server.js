@@ -7,7 +7,7 @@ var taskList;
 const fileName="tasks.json";
 
 
-// read();
+read();
 
 /**
  * Imagine there is a list of tasks like this:
