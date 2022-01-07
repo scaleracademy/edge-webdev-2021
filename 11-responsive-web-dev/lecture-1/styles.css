@@ -1,0 +1,90 @@
+* {
+  font-size: 16px; 
+  /* root font size */
+}
+
+.wrapper {
+  font-size: 2em;
+}
+
+.header {
+  font-size: 1em;
+}
+
+.title {
+  font-size: 15%;
+  margin-bottom: 2em;
+}
+
+.subtitle {
+  font-size: 1.5em;
+}
+
+.body {
+  font-size: 0.5rem;
+}
+
+button {
+  padding: 1.5em 2.5em;
+  display: block;
+  font-size: 0.25em;
+  margin: 0 2.5rem;
+}
+
+.button--small {
+  font-size: 1em;
+}
+
+.button--large {
+  font-size: 3em;
+}
+
+.parent {
+  height: 100px;
+  width: 500px;
+  border: 1px solid black;
+}
+
+.box {
+  background: red;
+  height: 100%;
+  min-height: 100px;
+  width: 50vw;
+}
+
+body {
+  color: red;
+}
+
+.main {
+  font-size: 15vw;
+}
+
+.secondary {
+  font-size: 3rem;
+}
+
+/* Media query with width */
+@media (max-width: 500px) {
+  body {
+    color: blue;
+  }
+
+  .main {
+    font-size: 3rem;
+  }
+}
+
+/* Media Query with print */
+/* @media print {
+  body {
+    color: blue;
+  }
+} */
+
+/* Media Queries with orientation */
+/* @media (orientation: landscape) and (orientation: portrait){
+  .main {
+    color: cyan;
+  }
+} */
