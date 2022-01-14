@@ -1,0 +1,72 @@
+.outer {
+  height: 200px;
+  width: 200px;
+  background: blue;
+}
+
+.inner {
+  height: 100px;
+  width: 100px;
+  background: red;
+  /* transition: transform 500ms ease-in-out; */
+}
+
+.inner {
+  /* transform: translateX(100%); */
+  animation: transformer-animation 1000ms ease-in-out forwards alternate infinite;
+  /* animation-fill-mode: forwards; */
+  /* animation-iteration-count: infinite; */
+  /* animation-direction: alternate; */
+}
+
+.outer:hover .inner {
+  animation-play-state: paused;
+}
+
+@keyframes transformer-animation {
+  33% {
+    transform: translateY(100%);
+  }
+  66% {
+    transform: translateX(100%) translateY(100%);
+    background-color: purple;
+  }
+  100% {
+    transform: translateX(100%);
+    background-color: green;
+  }
+}
+
+/* .timing-function-wrapper {
+  border: 1px solid green;
+  width: 100%;
+} */
+
+/* .timing-function {
+  height: 100px;
+  width: 300px;
+  background: red;
+}
+
+.timing-function-1 {
+  background: orange;
+  transition: width 2s ease-in-out;
+}
+
+.timing-function-2 {
+  background: yellow;
+  transition: width 2s linear;
+}
+
+.timing-function-3 {
+  background: purple;
+  transition: width 2s ease-in;
+}
+
+.timing-function-4 {
+  transition: width 2s ease-out;
+}
+
+.timing-functions-wrapper:hover .timing-function {
+  width: 500px;
+} */

@@ -1,0 +1,46 @@
+#one {
+  /* 0100 */
+  color: yellow;
+}
+
+.last {
+  color: blue;
+}
+
+.heading.heading-1 {
+  /* 0020 */
+  color: green;
+}
+
+div.heading-1 {
+  /* 0011 */
+  color: brown;
+}
+
+.heading {
+  /* 0010 */
+  color: cyan;
+}
+
+.heading-1 {
+  /* 0010 */
+  color: black;
+}
+
+div {
+  /* 0001 */
+  color: blue;
+}
+
+div {
+  /* 0001 */
+  color: red;
+}
+
+div div div div div div div div div div div div {
+  color: red !important;
+}
+
+.last:hover {
+  color: aqua;
+}

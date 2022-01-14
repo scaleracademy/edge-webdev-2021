@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-wrap: no-wrap;
+  background-color: grey;
+  animation: animate-margin 2000ms alternate infinite;
+}
+
+@keyframes animate-margin {
+  100% {
+    margin-top: 300px;
+  }
+}
+
+@keyframes animate-transform {
+  100% {
+    transform: translateY(300px);
+  }
+}
