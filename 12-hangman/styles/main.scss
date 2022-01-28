@@ -1,0 +1,95 @@
+.hangman-container {
+  position: relative;
+  padding-left: 10rem;
+  padding-top: 8rem;
+}
+
+.pole {
+  position: absolute;
+  height: 750px;
+  top: 2rem;
+  left: 3rem;
+  border-left: 10px solid brown;
+  border-top: 10px solid brown;
+  width: 10rem;
+  z-index: -1;
+  
+  &::after {
+    content: "";
+    height: 5.5rem;
+    width: 10px;
+    background: brown;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.hangman {
+  position: relative;
+  
+  &__element { 
+     opacity: 0.25;
+
+     & * {
+       z-index: -1;
+     }
+    
+    &:nth-child(1) {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      border: 10px solid black;
+    }
+    
+    &:not(:first-child) {
+      height: 100px;
+      width: 10px;
+      background: black;
+    }
+    
+    &:nth-child(2) {
+      position: absolute;
+      z-index: -1;
+      height: 300px;
+      left: 55px;
+    }
+    
+    &:nth-child(3) {
+      position: absolute;
+      transform: rotate(45deg);
+      top: 150px;
+      left: 20px;
+    }
+    
+    &:nth-child(4) {
+      position: absolute;
+      transform: rotate(-45deg);
+      top: 150px;
+      left: 90px;
+    }
+    
+     &:nth-child(5) {
+      position: absolute;
+      transform: rotate(45deg);
+      top: 400px;
+      left: 20px;
+    }
+    
+    &:nth-child(6) {
+      position: absolute;
+      transform: rotate(-45deg);
+      top: 400px;
+      left: 90px;
+    }
+  }
+}
+
+@for $i from 1 through 6 {
+  .hangman-#{$i} {
+    @for $j from 1 through $i {
+      .hangman__element:nth-child(#{$j}) {
+        opacity: 1;
+      }
+    }
+  }
+}
