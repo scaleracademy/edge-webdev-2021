@@ -5,9 +5,6 @@ import './styles/main.scss'
 
 const App = () => (
   <>
-    <div>
-      Hello World !
-    </div>
     <Game />
   </>
 

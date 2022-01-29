@@ -12,7 +12,7 @@ export default function Lives({ livesLeft }) {
       <div className="hangman__element"></div>
       <div className="hangman__element"></div>
     </div>
-    <div>
+    <div className='lives'>
       Lives: {livesLeft}
     </div>
   </div>

@@ -1,6 +1,7 @@
 module.exports = {
   mode: "development",
   entry: "./app.js",
+  watch: true,
   module: {
     rules: [
       {

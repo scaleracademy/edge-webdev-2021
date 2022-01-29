@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import Lives from './lives';
-import Word from './word';
-import Letters from './letters';
-import Start from './start';
+import Layout from './layout';
 
 const MAX_LIVES = 6;
 export default function Game() {
@@ -31,16 +28,15 @@ export default function Game() {
 
   return (
     <>
-      {isRunning && <>
-        <Lives livesLeft={lives} />
-        <Word actualWord={actualWord} playedLetters={played_set} />
-        <Letters playedLetters={played_set} onSelect={guess} />
-      </>}
-      <Start onStart={start} />
-
-      {isWon && <>
-        <div>You Won!</div>
-      </>}
+      <Layout
+        lives={lives}
+        actualWord={actualWord}
+        played_set={played_set}
+        guess={guess}
+        start={start}
+        isWon={isWon}
+        isRunning={isRunning}
+      />
     </>
   )
 }
