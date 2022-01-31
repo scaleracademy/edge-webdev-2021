@@ -12,12 +12,12 @@ export default function Game() {
     return !word_set.has(letter);
   })
   const lives = MAX_LIVES - wrongLetters.length
-  const isRunning = actualWord;
-  const isWon = isRunning && lives && [...word_set].reduce((acc, curr) => {
+  const isWon = lives && [...word_set].reduce((acc, curr) => {
     if (!played_set.has(curr)) return false;
     return acc;
   }, true)
-
+  const isRunning = actualWord && lives > 0 && !isWon;
+  
   const guess = letter => {
     setPlayedLetters((prev) => [...prev, letter])
   }

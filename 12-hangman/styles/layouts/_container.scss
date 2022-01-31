@@ -5,6 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .left-pane {

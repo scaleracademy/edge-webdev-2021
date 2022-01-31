@@ -3,7 +3,7 @@
   padding-left: 10rem;
   padding-top: 8rem;
   box-sizing: border-box;
-  height: 750px;
+  height: calc(760px + 2rem);
 }
 
 .pole {
@@ -11,8 +11,8 @@
   height: 750px;
   top: 2rem;
   left: 3rem;
-  border-left: 10px solid brown;
-  border-top: 10px solid brown;
+  border-left: 10px solid $pink-dark;
+  border-top: 10px solid $pink-dark;
   width: 10rem;
   // z-index: -1;
   
@@ -20,7 +20,7 @@
     content: "";
     height: 5.5rem;
     width: 10px;
-    background: brown;
+    background: $pink-dark;
     position: absolute;
     right: 0;
   }
@@ -36,13 +36,13 @@
       height: 100px;
       width: 100px;
       border-radius: 50%;
-      border: 10px solid black;
+      border: 10px solid $dark-color;
     }
     
     &:not(:first-child) {
       height: 100px;
       width: 10px;
-      background: black;
+      background: $dark-color;
     }
     
     &:nth-child(2) {
@@ -94,7 +94,7 @@
         &::after {
           content: "● ●";
           font-size: 3rem;
-          color: black;
+          color: $dark-color;
           position: absolute;
         }
         

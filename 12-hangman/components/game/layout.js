@@ -10,20 +10,26 @@ export default function Layout({
   return (
     <>
       <div className="game-wrapper">
-        {isRunning && <>
-          <div className="left-pane">
-            <Lives livesLeft={lives} />
-          </div>
-          <div className="right-pane">
-            <Word actualWord={actualWord} playedLetters={played_set} />
-            <Letters playedLetters={played_set} onSelect={guess} />
-          </div>
-        </>}
+        {
+          isRunning && <>
+            <div className="left-pane">
+              <Lives livesLeft={lives} />
+            </div>
+            <div className="right-pane">
+              <Word actualWord={actualWord} playedLetters={played_set} />
+              <Letters playedLetters={played_set} onSelect={guess} />
+            </div>
+          </>
+        }
+        
+        {
+          actualWord && isWon && <>
+            <div className="message">You Won!</div>
+          </>
+        }
+
         <Start onStart={start} isRunning={isRunning} />
 
-        {isWon && <>
-          <div>You Won!</div>
-        </>}
       </div>
     </>
   )

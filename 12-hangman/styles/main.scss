@@ -1,28 +1,13 @@
-@import "settings/reset.scss";
-@import "settings/variables.scss";
-@import "layouts/container.scss";
-@import "components/start.scss";
-@import "components/hangman.scss";
-@import "components/word.scss";
-@import "components/lives.scss";
+@import "settings/reset";
+@import "settings/variables";
 
-.display-none {
-  display: none;
-}
+@import "layouts/container";
 
-.display-flex {
-  display: flex;
-  flex-wrap: wrap;
-}
+@import "components/start";
+@import "components/hangman";
+@import "components/word";
+@import "components/lives";
+@import "components/others";
 
-.justify-content-center {
-  justify-content: center;
-}
-
-.justify-content-around {
-  justify-content: space-around;
-}
-
-.word-flex {
-  margin-bottom: 5rem;
-}
+@import "utils/flex";
+@import "utils/misc";
