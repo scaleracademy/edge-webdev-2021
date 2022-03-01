@@ -1,0 +1,14 @@
+{
+  "name": "basic-server",
+  "version": "0.0.1",
+  "description": "Basic http server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayush kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
