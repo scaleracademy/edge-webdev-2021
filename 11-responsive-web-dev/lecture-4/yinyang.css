@@ -1,5 +1,9 @@
 body {
-  background: pink;
+  background: #444;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .circle {

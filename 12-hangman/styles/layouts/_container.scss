@@ -17,10 +17,10 @@
   background: $pink-light;
   display: flex;
   align-items: flex-end;
+  position: relative;
 }
 
 .right-pane {
   flex: 1;
   color: white;
-
 }

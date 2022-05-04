@@ -1,8 +1,17 @@
 .lives {
   position: absolute;
   bottom: 0;
-  right: 0;
-  color: $dark-color;
-  font-size: 3rem;
-  font-family: 'Mochiy Pop P One', sans-serif;
+  right: 2rem;
+  background: url('https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png');
+  height: 50px;
+  background-size: 50px;
+  background-repeat: repeat no-repeat;
+  background-blend-mode: luminosity;
 }
+
+@for $i from 1 through 6 {
+  .lives-#{$i} {
+    width: 50px * $i;
+  }
+}
+
