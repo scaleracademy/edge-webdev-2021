@@ -50,3 +50,98 @@ console.log(addtwo(2,3))
 type myTuple = [number, string, boolean, number?]; // ? -> Makes an element optional
 let newTuple: myTuple = [23, "b", true, 54]
 // let newerTuple: myTuple = [];
+
+
+// GENERICS IN TYPESCRIPT
+type numArray = Array<number>;
+type numnumArray = Array<numArray>;
+// Angle brackets contain the generic part
+
+// Generics in functions
+// function getArray(items: any[]): any[] {
+//   return new Array().concat(items)
+// }
+
+const lastElement = <T>(arr: Array<T>) => {
+  return arr[arr.length - 1]
+}
+
+const l1 = lastElement([1,2,3]);
+const l2 = lastElement(['a','b','c']);
+const l3 = lastElement([1,'a',3]);
+
+const makeArray = <X = boolean, Y = string>(x: X, y: Y) => {
+  return [x, y];
+}
+
+const a1 = makeArray(5,6);
+const a2 = makeArray(5,'b');
+const a3 = makeArray<string | null>(null, '5'); // You can add unions while calling a function with generic type
+
+// Extension in generics -> Interfaces
+
+// const makeFullName = (obj: {
+//   firstName: string;
+//   lastName: string;
+// }) => {
+//   return {
+//     ...obj,
+//     fullName: obj.firstName + " " + obj.lastName
+//   }
+// }
+
+// const f1 = makeFullName({
+//   firstName: "something",
+//   lastName: "sinclair",
+//   age: 25
+// })
+
+// We need to ensure that two fields exist for sure but other fields can also exist
+
+interface basics {
+  firstName: string;
+  lastName: string;
+};
+
+const makeFullName = <T extends {
+  firstName: string;
+  lastName: string;
+}>(obj: T) => {
+  return {
+    ...obj,
+    fullName: obj.firstName + " " + obj.lastName
+  }
+}
+
+const f1 = makeFullName({
+  firstName: "something",
+  lastName: "sinclair",
+  age: 25,
+  random: true
+})
+
+// Generics with Interfaces
+interface Tablet<T> {
+  id: string;
+  position: number;
+  data: T
+}
+
+type numberTablet = Tablet<number>;
+
+let something: numberTablet;
+
+// Debatable feature of interfaces
+interface Person {
+  name: string;
+  hungry: boolean;
+}
+
+interface Person {
+  hangry: boolean
+}
+
+// Interface declaration merging in TS
+
+type personType = Person;
+let me: personType;
